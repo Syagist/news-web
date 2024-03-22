@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyledNavigation} from "./StyledNavigation";
+import {Link} from "react-router-dom";
 
 const Navigation = () => {
     return (
         <StyledNavigation>
-            nav
+            <Link key={'Home'} to={'Home'}>Home</Link>
+            <Link key={'new-york-times'} to={'new-york-times'}> New Yok Times</Link>
         </StyledNavigation>
     );
 };
