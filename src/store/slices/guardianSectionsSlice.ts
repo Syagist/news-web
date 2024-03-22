@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {GUARDIAN_API} from "../../constants/AppConstants";
+import {GUARDIAN_API} from "constants/AppConstants";
 import axios from "axios";
 
 interface CategoryState {
     data: any,
     loading: boolean,
     error: null | string
+
 }
 
 const initialState: CategoryState = {
