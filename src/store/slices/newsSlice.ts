@@ -34,11 +34,12 @@ const initialState: INews = {
     error: null
 };
 
+
 const fetchNews = createAsyncThunk(
     'articles/fetchNews',
-    async () => {
+    async ({ country }: { country: string }) => {
         try {
-            const query = `/everything?q=armenia&apiKey=${REACT_APP_NEWS_API_KEY}`
+            const query = `/everything?q=${country}&apiKey=${REACT_APP_NEWS_API_KEY}&pageSize=5`
             const endpoint = `${NEWS_API}${query}`;
             const response = await axios.get(endpoint);
             return await response.data;

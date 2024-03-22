@@ -1,9 +1,20 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+const StyledContainer = createGlobalStyle`
 
     body {
         font-family: 'Gilroy', sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    img {
+        max-width: 100%;
+        max-height: 100%;
     }
 
     @font-face {
@@ -55,4 +66,4 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-export default GlobalStyle;
+export default StyledContainer;

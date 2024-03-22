@@ -1,20 +1,26 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyledHome} from "./StyledHome";
-import {useAppDispatch,RootState, useAppSelector} from "store/store";
+import {RootState, useAppDispatch, useAppSelector} from "store/store";
 import {fetchNews} from "store/slices/newsSlice";
 import Articles from "../../components/common/articles/Articles";
 
 const Home = () => {
     const dispatch = useAppDispatch();
     const news = useAppSelector((state: RootState) => state.news);
+    const [country, setCountry] = useState('armenia');
 
     useEffect(() => {
-        dispatch(fetchNews());
-    }, [dispatch]);
+        dispatch(fetchNews({country: country}));
+    }, [country]);
+
+    const searchNews = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        setCountry(event.target.value);
+    }
 
     return (
         <StyledHome>
-            <Articles articles={news.articles}  />
+            <input onChange={searchNews} value={country}/>
+            <Articles articles={news.articles}/>
         </StyledHome>
     );
 };

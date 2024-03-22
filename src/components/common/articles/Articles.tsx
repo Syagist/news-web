@@ -12,7 +12,7 @@ const Articles: React.FC<ArticlesProps> = ({articles}) => {
         <StyledArticles>
             {
                 articles && articles.length > 0 ?
-                    articles.map(article => <Article article={article}/>) :
+                    articles.map(article => <Article key={article.url} article={article}/>) :
                     <p>empty</p>
             }
         </StyledArticles>
