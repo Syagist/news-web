@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {GUARDIAN_API} from "constants/AppConstants";
+import {GUARDIAN_API, NEW_YORK_TIMES} from "constants/AppConstants";
 import axios from "axios";
 
 interface CategoryState {
@@ -15,40 +15,40 @@ const initialState: CategoryState = {
     error: null,
 };
 
-const fetchSections = createAsyncThunk(
-    'sections/fetchSections',
+const fetchArchives = createAsyncThunk(
+    'archives/fetchArchives',
     async () => {
         try {
-            const endpoint = `${GUARDIAN_API}/sections&api-key=afc04f16-a674-4b1a-b143-121c0b77e5d3`;
+            const endpoint = `${NEW_YORK_TIMES}/svc/archive/v1/2019/1.json?api-key=WYITjuRMNuexA42p6cWkZZjxABoX1GDX`;
             const response = await axios.get(endpoint);
             return await response.data;
         } catch (error) {
-            throw Error('Failed to fetch Sections');
+            throw Error('Failed to fetch Archives');
         }
     }
 );
 
-const categorySlice = createSlice({
-    name: 'sections',
+const archiveSlice = createSlice({
+    name: 'archives',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSections.pending, (state) => {
+            .addCase(fetchArchives.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchSections.fulfilled, (state, action) => {
+            .addCase(fetchArchives.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload;
             })
-            .addCase(fetchSections.rejected, (state, action) => {
+            .addCase(fetchArchives.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message ?? 'Failed to fetch Sections';
+                state.error = action.error.message ?? 'Failed to fetch Archives';
             });
     },
 });
 
-export default categorySlice.reducer;
+export default archiveSlice.reducer;
 
-export {fetchSections};
+export {fetchArchives};
