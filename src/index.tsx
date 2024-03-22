@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import {ErrorBoundary} from "react-error-boundary";
+import AppRouter from "./AppRouter";
+import ErrorFallback from "./components/layout/errorFallback/ErrorFallback";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <AppRouter/>
+        </ErrorBoundary>
+
+    </React.StrictMode>
 );
 
