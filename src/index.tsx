@@ -17,7 +17,6 @@ root.render(
                 <AppRouter/>
             </Provider>
         </ErrorBoundary>
-
     </React.StrictMode>
 );
 

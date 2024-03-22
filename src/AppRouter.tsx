@@ -6,6 +6,7 @@ import Home from './pages/home/Home'
 import NotFound from './pages/notFound/NotFound'
 import NewYorkTimes from "./pages/newYorkTimes/NewYorkTimes";
 import Guardian from "./pages/guardian/Guardian";
+import GlobalStyle from "./styles/StyledContainer";
 
 const Layout = () => {
     return (
@@ -19,6 +20,7 @@ const Layout = () => {
 
 const AppRouter = () => (
     <BrowserRouter>
+        <GlobalStyle/>
         <Routes>
             <Route path='/' element={<Layout/>}>
                 <Route index element={<Home/>}/>

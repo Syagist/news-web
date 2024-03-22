@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
+import {useDispatch, useSelector} from "react-redux";
 import guardianSectionsSlice from './slices/guardianSectionsSlice';
 import archiveSlice from './slices/archiveSlice';
-import {useDispatch, useSelector} from "react-redux";
-import everythingSlice from "./slices/everythingSlice";
+import newsSlice from "./slices/newsSlice";
 
 const store = configureStore({
     reducer: {
         sections: guardianSectionsSlice,
         archives: archiveSlice,
-        everything: everythingSlice
+        news: newsSlice
     },
 });
 
@@ -19,3 +19,4 @@ export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
 
 export default store;
+

@@ -1,21 +1,20 @@
 import React, {useEffect} from 'react';
 import {StyledHome} from "./StyledHome";
-import {useAppDispatch} from "../../store/store";
-import {fetchArchives} from "../../store/slices/archiveSlice";
-import {fetchEverything} from "../../store/slices/everythingSlice";
+import {useAppDispatch,RootState, useAppSelector} from "store/store";
+import {fetchNews} from "store/slices/newsSlice";
+import Articles from "../../components/common/articles/Articles";
 
 const Home = () => {
     const dispatch = useAppDispatch();
+    const news = useAppSelector((state: RootState) => state.news);
 
     useEffect(() => {
-        dispatch(fetchEverything());
-    }, []);
-    useEffect(() => {
-        console.log()
+        dispatch(fetchNews());
     }, [dispatch]);
+
     return (
         <StyledHome>
-            Home
+            <Articles articles={news.articles}  />
         </StyledHome>
     );
 };
