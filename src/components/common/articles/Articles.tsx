@@ -1,19 +1,33 @@
 import React from 'react';
 import {StyledArticles} from "./StyledArticles";
-import {IArticle} from "store/slices/newsSlice";
+import {INews} from "store/slices/newsSlice";
 import Article from "components/common/article/Article";
+import ArticleSkeleton from "../article/ArticleSkeleton";
 
 interface ArticlesProps {
-    articles: IArticle[] | null;
+    news: INews;
 }
 
-const Articles: React.FC<ArticlesProps> = ({articles}) => {
+const Articles: React.FC<ArticlesProps> = ({news}) => {
+    const {articles} = news;
+
+    if (!articles || articles.length === 0) {
+        return (
+            <StyledArticles>
+                <ArticleSkeleton/>
+                <ArticleSkeleton/>
+                <ArticleSkeleton/>
+                <ArticleSkeleton/>
+                <ArticleSkeleton/>
+                <ArticleSkeleton/>
+            </StyledArticles>
+        );
+    }
+
     return (
         <StyledArticles>
             {
-                articles && articles.length > 0 ?
-                    articles.map(article => <Article key={article.url} article={article}/>) :
-                    <p>empty</p>
+                articles?.map(article => <Article key={article.url} article={article}/>)
             }
         </StyledArticles>
     );

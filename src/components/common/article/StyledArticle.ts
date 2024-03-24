@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {ARTICLE_DATE_COLOR} from "styles/AppColors";
+import {skeletonStyles} from "../../../styles/Animations";
 
 export const ArticleContent = styled.div`
     flex: 0 0 33.3%;
@@ -8,11 +9,12 @@ export const ArticleContent = styled.div`
     @media (max-width: 1024px) {
         flex: 0 0 50%;
     }
-    
+
     @media (max-width: 768px) {
         flex: 0 0 100%;
     }
 `;
+
 
 export const ArticleImageWrapper = styled.div`
     width: 100%;
@@ -32,6 +34,11 @@ export const ArticleImage = styled.img`
     transition: all 0.5s ease;
 `;
 
+export const ArticleImageSkeleton = styled.div`
+    ${skeletonStyles};
+    height: 100%;
+`;
+
 export const ArticleLink = styled.a`
     width: 100%;
     height: 100%;
@@ -42,13 +49,14 @@ export const ArticleLink = styled.a`
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    
+    min-height: 320px;
+
     &:hover {
         img {
             transform: scale(1.02);
         }
     }
-    
+
     @media (max-width: 1440px) {
         border-radius: 14px;
     }
@@ -65,11 +73,21 @@ export const ArticleTitle = styled.h3`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
 `;
+
+
+export const ArticleTitleSkeleton = styled.div`
+    min-height: 24px;
+    border-radius: 4px;
+    animation-delay: .05s;
+    margin-bottom: 10px;
+    ${skeletonStyles}
+`;
+
 
 export const ArticleDescription = styled.p`
     font-weight: 400;
@@ -78,11 +96,16 @@ export const ArticleDescription = styled.p`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
 `;
-
+export const ArticleDescriptionSkeleton = styled.div`
+    min-height: 16px;
+    border-radius: 4px;
+    animation-delay: .05s;
+    ${skeletonStyles}
+`;
 export const ArticlePublishDate = styled.span`
     font-weight: 300;
     font-size: 10px;

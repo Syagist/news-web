@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyledHome} from "./StyledHome";
 import {RootState, useAppDispatch, useAppSelector} from "store/store";
 import {fetchNews} from "store/slices/newsSlice";
-import Articles from "../../components/common/articles/Articles";
+import Articles from "components/common/articles/Articles";
 
 const Home = () => {
     const dispatch = useAppDispatch();
@@ -10,8 +10,16 @@ const Home = () => {
     const [country, setCountry] = useState('armenia');
 
     useEffect(() => {
-        dispatch(fetchNews({country: country}));
-    }, [country]);
+        const fetchData = async () => {
+            try {
+                await dispatch(fetchNews({country: country}));
+            } catch (error) {
+                console.log('Error occurred while fetching news:', error);
+            }
+        };
+
+        fetchData();
+    }, [country, dispatch]);
 
     const searchNews = (event: React.ChangeEvent<HTMLInputElement> ) => {
         setCountry(event.target.value);
@@ -20,7 +28,7 @@ const Home = () => {
     return (
         <StyledHome>
             <input onChange={searchNews} value={country}/>
-            <Articles articles={news.articles}/>
+            <Articles news={news}/>
         </StyledHome>
     );
 };
