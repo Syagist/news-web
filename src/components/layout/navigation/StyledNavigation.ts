@@ -11,6 +11,11 @@ export const StyledNavigation = styled.nav`
     box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
     padding: 10px 20px;
     z-index: 300;
+
+    @media (max-width: 768px) {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 `;
 
 export const StyledNavigationWrapper = styled.div`
@@ -64,4 +69,3 @@ export const StyledNavigationBurger = styled.button`
         cursor: pointer;
     }
 `;
-
