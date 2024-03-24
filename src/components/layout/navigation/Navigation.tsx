@@ -17,7 +17,7 @@ const Navigation = () => {
                     isNavOpen ? <CloseIcon/> : <BurgerIcon/>
                 }
             </StyledNavigationBurger>
-            <StyledNavigationWrapper style={{left: isNavOpen ? '0' : '-100vw'}}>
+            <StyledNavigationWrapper style={{left: isNavOpen || window.innerWidth > 768 ? '0' : '-100vw'}}>
                 <StyledLink key={'Home'} to={'Home'}>Home</StyledLink>
                 <StyledLink key={'new-york-times'} to={'new-york-times'}> New Yok Times</StyledLink>
                 <StyledLink key={'guardian'} to={'guardian'}>Guardian</StyledLink>

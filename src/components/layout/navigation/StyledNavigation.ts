@@ -25,7 +25,7 @@ export const StyledNavigationWrapper = styled.div`
         position: absolute;
         left: -100%;
         top: 0;
-        width: calc(100vw - 20px);
+        width: 100vw;
         height: 100vh;
         transition: left 0.3s ease;
         z-index: 100;
