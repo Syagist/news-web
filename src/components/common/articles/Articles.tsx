@@ -2,7 +2,7 @@ import React from 'react';
 import {StyledArticles} from "./StyledArticles";
 import {INews} from "store/slices/newsSlice";
 import Article from "components/common/article/Article";
-import ArticleSkeleton from "../article/ArticleSkeleton";
+import ArticleSkeleton from "components/common/article/ArticleSkeleton";
 
 interface ArticlesProps {
     news: INews;
@@ -10,6 +10,10 @@ interface ArticlesProps {
 
 const Articles: React.FC<ArticlesProps> = ({news}) => {
     const {articles} = news;
+
+    if (news.error) {
+        //error popup ftr
+    }
 
     if (!articles || articles.length === 0) {
         return (

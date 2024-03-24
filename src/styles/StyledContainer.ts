@@ -4,6 +4,7 @@ const StyledContainer = createGlobalStyle`
 
     body {
         font-family: 'Gilroy', sans-serif;
+        padding-top: 60px;
     }
 
     * {
@@ -11,7 +12,17 @@ const StyledContainer = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
-    
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
     img {
         max-width: 100%;
         max-height: 100%;

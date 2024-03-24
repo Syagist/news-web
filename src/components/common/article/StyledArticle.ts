@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {ARTICLE_DATE_COLOR} from "styles/AppColors";
-import {skeletonStyles} from "../../../styles/Animations";
+import {skeletonStyles} from "styles/Animations";
 
 export const ArticleContent = styled.div`
     flex: 0 0 33.3%;
@@ -44,7 +44,7 @@ export const ArticleLink = styled.a`
     height: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 15px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0,0,0,.16);
     border-radius: 16px;
     overflow: hidden;
     position: relative;

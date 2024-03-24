@@ -10,15 +10,7 @@ const Home = () => {
     const [country, setCountry] = useState('armenia');
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await dispatch(fetchNews({country: country}));
-            } catch (error) {
-                console.log('Error occurred while fetching news:', error);
-            }
-        };
-
-        fetchData();
+        dispatch(fetchNews({country: country}))
     }, [country, dispatch]);
 
     const searchNews = (event: React.ChangeEvent<HTMLInputElement> ) => {
