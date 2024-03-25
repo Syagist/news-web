@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {RootState, useAppDispatch, useAppSelector} from "store/store";
 import {fetchGuardianNews} from "store/slices/newsGuardianSlice";
-import Search from "../../components/common/search/Search";
-import Articles from "../../components/common/articles/Articles";
+import Search from "components/common/search/Search";
+import Articles from "components/common/articles/Articles";
 import {StyledGuardian} from "./StyledGuardian";
 
 const Guardian = () => {

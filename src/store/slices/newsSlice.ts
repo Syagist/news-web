@@ -1,31 +1,7 @@
 import axios from "axios";
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {NEWS_API, REACT_APP_NEWS_API_KEY} from "constants/AppConstants";
-import {IGuardianNews} from "./newsGuardianSlice";
-
-interface ISource {
-    id: string | null;
-    name: string;
-}
-
-export interface IArticle {
-    source: ISource;
-    author: string | null;
-    title: string;
-    description: string | null;
-    url: string;
-    urlToImage: string | undefined;
-    publishedAt: string;
-    content: string;
-}
-
-export interface INews {
-    status: string | null;
-    totalResults: number | null;
-    articles: IArticle[] | null;
-    loading: boolean,
-    error: null | string
-}
+import {INews} from "interfaces/Inews";
 
 const initialState: INews = {
     status: null,
@@ -35,12 +11,18 @@ const initialState: INews = {
     error: null
 };
 
+interface NewsRequestProperties {
+    query: string,
+    order: string,
+    sources: string;//'bbc-news,cnn,the-new-york-times'
+}
 
 const fetchNews = createAsyncThunk(
     'articles/fetchNews',
-    async ({ query }: { query: string }) => {
+    async ({query, order, sources}: NewsRequestProperties) => {
+
         try {
-            const endpoint = `${NEWS_API}/everything?q=${query}&apiKey=${REACT_APP_NEWS_API_KEY}&pageSize=5`;
+            const endpoint = `${NEWS_API}/everything?sources=${sources}&q=${query}&sortBy=${order}&apiKey=${REACT_APP_NEWS_API_KEY}&pageSize=5`;
             const response = await axios.get(endpoint);
             return await response.data;
         } catch (error) {

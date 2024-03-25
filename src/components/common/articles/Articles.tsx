@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyledArticles} from './StyledArticles';
-import {IArticle, INews} from 'store/slices/newsSlice';
 import Article from 'components/common/article/Article';
-import ArticleSkeleton from 'components/common/article/ArticleSkeleton';
-import {IGuardianArticle, IGuardianNews} from "store/slices/newsGuardianSlice";
+import {IGuardianArticle, IGuardianNews} from "interfaces/Iguardian";
+import {IArticle, INews} from "interfaces/Inews";
+import NoDataView from "../noDataView/NoDataView";
+import Skeletons from "./Skeletons";
 
 interface ArticlesProps {
     news: INews | IGuardianNews;
@@ -18,7 +19,7 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
     }
 
     if (news.loading) {
-        return <SkeletonList/>;
+        return <Skeletons/>;
     }
 
 
@@ -30,25 +31,14 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
         return <ArticleList articles={news.articles!} source={'newsApi'}/>
     }
 
-    return <EmptyView/>;
+    return <NoDataView title={'No data'} description={'Sorry there is no news by your search'}/>;
 }
 
-
-const EmptyView: React.FC = () => {
-    return <div>No data found</div>;
-};
 
 const ErrorView: React.FC = () => {
     return <div>Error: Failed to load articles.</div>;
 };
 
-const SkeletonList: React.FC = () => {
-    const skeletonItems = Array.from({length: 6}).map((_, index) => (
-        <ArticleSkeleton key={index}/>
-    ));
-
-    return <StyledArticles>{skeletonItems}</StyledArticles>;
-};
 
 interface ArticleListProps {
     articles: IArticle[] | IGuardianArticle[];

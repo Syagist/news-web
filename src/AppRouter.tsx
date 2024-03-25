@@ -26,7 +26,7 @@ const AppRouter = () => (
                 <Route index element={<Home/>}/>
                 <Route path={'/home'} element={<Home/>}/>
                 <Route path={'/new-york-times'} element={<NewYorkTimes/>}/>
-                <Route path={'/guardian'} element={<Guardian/>}/>
+                <Route path={'/Iguardian.ts'} element={<Guardian/>}/>
                 <Route path='*' element={<NotFound/>}/>
             </Route>
         </Routes>

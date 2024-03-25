@@ -82,6 +82,7 @@ export const ArticleTitle = styled.h3`
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    word-break: break-all;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
@@ -105,6 +106,7 @@ export const ArticleDescription = styled.p`
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    word-break: break-all;
     line-clamp: 2;
     -webkit-box-orient: vertical;
 `;

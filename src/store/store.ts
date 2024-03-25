@@ -2,9 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import {useDispatch, useSelector} from "react-redux";
 import newsSlice from "./slices/newsSlice";
 import newsGuardianSlice from "./slices/newsGuardianSlice";
+import newsSourcesSlice from "./slices/newsSourcesSlice";
 
 const store = configureStore({
     reducer: {
+        newsSources: newsSourcesSlice,
         newsGuardian: newsGuardianSlice,
         news: newsSlice
     },

@@ -1,49 +1,14 @@
 import axios from "axios";
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {GUARDIAN_API, REACT_APP_GUARDIAN_API_KEY} from "constants/AppConstants";
+import {IGuardianNews} from "interfaces/Iguardian";
 
-interface ArticleFields {
-    thumbnail: string,
-    trailText: string
-}
-
-export interface IGuardianArticle {
-    id: string;
-    type: string;
-    sectionId: string;
-    sectionName: string;
-    webPublicationDate: string;
-    webTitle: string;
-    webUrl: string;
-    apiUrl: string;
-    isHosted: boolean;
-    pillarId: string;
-    pillarName: string;
-    fields: ArticleFields
-}
-
-export interface IGuardianNews {
-    loading: boolean,
-    error: null | string,
-    response: {
-        status: string;
-        userTier: string;
-        total: number;
-        startIndex: number;
-        pageSize: number;
-        currentPage: number;
-        pages: number;
-        orderBy: string;
-        results: IGuardianArticle[];
-    } | null;
-}
 
 const initialState: IGuardianNews = {
     response: null,
     loading: true,
     error: null
 };
-
 
 const fetchGuardianNews = createAsyncThunk(
     'articles/fetchGuardianNews',
@@ -70,7 +35,6 @@ const guardianNewsSlice = createSlice({
             })
             .addCase(fetchGuardianNews.fulfilled, (state, action) => {
                 state.loading = false;
-                debugger
                 state.response = action.payload.response;
             })
             .addCase(fetchGuardianNews.rejected, (state, action) => {

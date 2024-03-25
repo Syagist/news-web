@@ -9,7 +9,7 @@ import {
     ArticleTitleSkeleton
 } from "./StyledArticle";
 
-const ArticleSkeleton = () => {
+const Skeleton = () => {
     return (
         <ArticleContent>
             <ArticleLink>
@@ -25,4 +25,4 @@ const ArticleSkeleton = () => {
     );
 };
 
-export default ArticleSkeleton;
+export default Skeleton;
