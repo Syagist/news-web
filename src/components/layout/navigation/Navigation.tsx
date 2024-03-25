@@ -18,9 +18,9 @@ const Navigation = () => {
                 }
             </StyledNavigationBurger>
             <StyledNavigationWrapper style={{left: isNavOpen || window.innerWidth > 768 ? '0' : '-100vw'}}>
-                <StyledLink key={'Home'} to={'Home'}>Home</StyledLink>
-                <StyledLink key={'new-york-times'} to={'new-york-times'}> New Yok Times</StyledLink>
-                <StyledLink key={'guardian'} to={'guardian'}>Guardian</StyledLink>
+                <StyledLink onClick={toggleNav}  to={'/home'}>Home</StyledLink>
+                <StyledLink onClick={toggleNav} to={'new-york-times'}> New Yok Times</StyledLink>
+                <StyledLink onClick={toggleNav} to={'guardian'}>Guardian</StyledLink>
             </StyledNavigationWrapper>
         </StyledNavigation>
     );

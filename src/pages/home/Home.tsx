@@ -8,19 +8,19 @@ import Search from "components/common/search/Search";
 const Home = () => {
     const dispatch = useAppDispatch();
     const news = useAppSelector((state: RootState) => state.news);
-    const [country, setCountry] = useState('armenia');
+    const [query, setQuery] = useState('armenia');
 
     useEffect(() => {
-        dispatch(fetchNews({country: country}))
-    }, [country, dispatch]);
+        dispatch(fetchNews({query: query}))
+    }, [query, dispatch]);
 
-    const searchNews = (event: React.ChangeEvent<HTMLInputElement> ) => {
-        setCountry(event.target.value);
+    const searchNews = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(event.target.value);
     }
 
     return (
         <StyledHome>
-            <Search value={country} onSearchChange={searchNews}/>
+            <Search value={query} onSearchChange={searchNews}/>
             <Articles news={news}/>
         </StyledHome>
     );

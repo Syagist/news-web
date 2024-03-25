@@ -29,6 +29,7 @@ export const StyledSearchInput = styled.input`
 
     &:focus, &:focus-visible {
         border: 0;
+        outline: none;
     }
 `;
 
