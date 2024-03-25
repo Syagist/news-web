@@ -3,7 +3,7 @@ import {StyledHome} from "./StyledHome";
 import {RootState, useAppDispatch, useAppSelector} from "store/store";
 import {fetchNews} from "store/slices/newsSlice";
 import Articles from "components/common/articles/Articles";
-import Search from "../../components/common/search/Search";
+import Search from "components/common/search/Search";
 
 const Home = () => {
     const dispatch = useAppDispatch();

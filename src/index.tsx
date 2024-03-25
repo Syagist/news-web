@@ -11,12 +11,12 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Provider store={store}>
                 <AppRouter/>
             </Provider>
         </ErrorBoundary>
-    </React.StrictMode>
+    // </React.StrictMode>
 );
 

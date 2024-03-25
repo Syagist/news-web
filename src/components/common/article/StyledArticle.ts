@@ -4,7 +4,7 @@ import {skeletonStyles} from "styles/Animations";
 
 export const ArticleContent = styled.div`
     flex: 0 0 33.3%;
-    padding: 0 20px 20px;
+    padding: 0 10px 20px;
 
     @media (max-width: 1024px) {
         flex: 0 0 50%;
@@ -18,8 +18,10 @@ export const ArticleContent = styled.div`
 
 export const ArticleImageWrapper = styled.div`
     width: 100%;
-    flex: 1;
+    height: 0;
+    padding-bottom: 60%;
     overflow: hidden;
+    position: relative;
 `;
 
 export const ArticleContentWrapper = styled.div`
@@ -30,6 +32,9 @@ export const ArticleContentWrapper = styled.div`
 export const ArticleImage = styled.img`
     width: 100%;
     height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
     object-fit: cover;
     transition: all 0.5s ease;
 `;
@@ -37,6 +42,9 @@ export const ArticleImage = styled.img`
 export const ArticleImageSkeleton = styled.div`
     ${skeletonStyles};
     height: 100%;
+    height: 0;
+    padding-bottom: 60%;
+    
 `;
 
 export const ArticleLink = styled.a`
