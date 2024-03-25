@@ -23,11 +23,11 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
 
 
     if (hasGuardianData) {
-        return <GuardianArticleList articles={news.response!.results}/>
+        return <ArticleList articles={news.response!.results} source={'guardian'}/>
     }
 
     if (hasNewsApiData) {
-        return <ArticleList articles={news.articles!}/>
+        return <ArticleList articles={news.articles!} source={'newsApi'}/>
     }
 
     return <EmptyView/>;
@@ -51,30 +51,22 @@ const SkeletonList: React.FC = () => {
 };
 
 interface ArticleListProps {
-    articles: IArticle[];
+    articles: IArticle[] | IGuardianArticle[];
+    source: 'guardian' | 'newsApi';
 }
 
-interface GuardianArticleListProps {
-    articles: IGuardianArticle[];
-}
-
-const ArticleList: React.FC<ArticleListProps> = ({articles}) => {
+const ArticleList: React.FC<ArticleListProps> = ({articles, source}) => {
     return (
         <StyledArticles>
             {articles.map((article) => (
-                <Article key={article.url} articleSrc={article} source={'newsApi'}/>
+                <Article
+                    key={source === 'newsApi' ? (article as IArticle).url : (article as IGuardianArticle).id}
+                    articleSrc={article}
+                    source={source}
+                />
             ))}
         </StyledArticles>
     );
 };
 
-const GuardianArticleList: React.FC<GuardianArticleListProps> = ({articles}) => {
-    return (
-        <StyledArticles>
-            {articles.map((article) => (
-                <Article key={article.id} articleSrc={article} source={'guardian'}/>
-            ))}
-        </StyledArticles>
-    );
-};
 export default Articles;
