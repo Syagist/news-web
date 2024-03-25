@@ -3,6 +3,7 @@ import {RootState, useAppDispatch, useAppSelector} from "store/store";
 import {fetchGuardianNews} from "store/slices/newsGuardianSlice";
 import Search from "../../components/common/search/Search";
 import Articles from "../../components/common/articles/Articles";
+import {StyledGuardian} from "./StyledGuardian";
 
 const Guardian = () => {
     const dispatch = useAppDispatch();
@@ -18,10 +19,10 @@ const Guardian = () => {
     }
 
     return (
-        <div>
+        <StyledGuardian>
             <Search value={query} onSearchChange={searchNews}/>
             <Articles news={newsGuardian}/>
-        </div>
+        </StyledGuardian>
     );
 };
 

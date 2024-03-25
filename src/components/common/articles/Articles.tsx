@@ -10,6 +10,9 @@ interface ArticlesProps {
 }
 
 const Articles: React.FC<ArticlesProps> = ({news}) => {
+    const hasGuardianData = 'response' in news && news.response !== null && news.response.results.length > 0;
+    const hasNewsApiData = 'articles' in news && news.articles !== null && news.articles.length > 0;
+
     if (news.error) {
         return <ErrorView/>;
     }
@@ -18,16 +21,21 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
         return <SkeletonList/>;
     }
 
-    if ('response' in news && news.response !== null) {
-        return <GuardianArticleList articles={news.response.results}/>
+
+    if (hasGuardianData) {
+        return <GuardianArticleList articles={news.response!.results}/>
     }
 
-    else if ('articles' in news && news.articles !== null) {
-        return <ArticleList articles={news.articles}/>
+    if (hasNewsApiData) {
+        return <ArticleList articles={news.articles!}/>
     }
 
-    return <ErrorView/>;
+    return <EmptyView/>;
+}
 
+
+const EmptyView: React.FC = () => {
+    return <div>No data found</div>;
 };
 
 const ErrorView: React.FC = () => {
@@ -51,10 +59,6 @@ interface GuardianArticleListProps {
 }
 
 const ArticleList: React.FC<ArticleListProps> = ({articles}) => {
-    if (!articles || articles.length === 0) {
-        return <div>No articles found.</div>;
-    }
-
     return (
         <StyledArticles>
             {articles.map((article) => (
@@ -65,7 +69,6 @@ const ArticleList: React.FC<ArticleListProps> = ({articles}) => {
 };
 
 const GuardianArticleList: React.FC<GuardianArticleListProps> = ({articles}) => {
-
     return (
         <StyledArticles>
             {articles.map((article) => (
