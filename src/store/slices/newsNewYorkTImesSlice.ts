@@ -4,23 +4,11 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 interface INewYorkTimesData {
     loading: boolean,
     error: null | string,
-    response: {
-        docs: INewYorkTimesDocument[];
-        status: string;
-    } | null;
+    response: INewYorkTimes
 }
 
-interface INewYorkTimesResponse {
-    status: string;
-    copyright: string;
-    loading: boolean,
-    error: null | string,
-    response: {
-        docs: INewYorkTimesDocument[];
-        meta: {
-            // Define meta properties here if needed
-        };
-    };
+interface INewYorkTimes {
+    docs: INewYorkTimesDocument[];
 }
 
 interface INewYorkTimesDocument {
@@ -84,11 +72,12 @@ interface INewYorkTimesDocument {
     uri: string;
 }
 
-const initialState: any = {
-    docs: null,
+const initialState: INewYorkTimesData = {
+    response: {} as INewYorkTimes,
     loading: true,
     error: null
 };
+
 const fetchNewYorkTimesNews = createAsyncThunk(
     'articles/fetchNewYorkTimesNews',
     async () => {
@@ -109,6 +98,7 @@ const fetchNewYorkTimesNews = createAsyncThunk(
         }
     }
 );
+
 const newYorkTimesNewsSlice = createSlice({
     name: 'newYorkTimesNews',
     initialState,
@@ -122,8 +112,8 @@ const newYorkTimesNewsSlice = createSlice({
             .addCase(fetchNewYorkTimesNews.fulfilled, (state, action) => {
                 state.loading = false;
                 debugger
-                console.log('11111111111999')
-                state.data = action.payload.docs; // Changed response to data
+                console.log('123123')
+                state.response.docs = action.payload.docs; // Access docs directly
             })
             .addCase(fetchNewYorkTimesNews.rejected, (state, action) => {
                 state.loading = false;
@@ -135,6 +125,3 @@ const newYorkTimesNewsSlice = createSlice({
 export default newYorkTimesNewsSlice.reducer;
 
 export {fetchNewYorkTimesNews};
-
-
-
