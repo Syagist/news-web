@@ -2,6 +2,7 @@ import axios from "axios";
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {GUARDIAN_API, REACT_APP_GUARDIAN_API_KEY} from "constants/AppConstants";
 import {IGuardianNews} from "interfaces/Iguardian";
+import {Irange} from "../../interfaces/Irange";
 
 
 const initialState: IGuardianNews = {
@@ -10,11 +11,20 @@ const initialState: IGuardianNews = {
     error: null
 };
 
+interface GuardianRequestProperties {
+    query: string,
+    range: Irange
+}
+
 const fetchGuardianNews = createAsyncThunk(
     'articles/fetchGuardianNews',
-    async ({query}: { query: string }) => {
+    async ({query, range}: GuardianRequestProperties) => {
         try {
-            const endpoint = `${GUARDIAN_API}/search?q=${query}&api-key=${REACT_APP_GUARDIAN_API_KEY}&show-fields=thumbnail,trailText`;
+            let dateQuery = '';
+            if (range.to && range.from) {
+                dateQuery = `&from-date=${range.from}&to-date=${range.to}`
+            }
+            const endpoint = `${GUARDIAN_API}/search?q=${query}${dateQuery}&api-key=${REACT_APP_GUARDIAN_API_KEY}&show-fields=thumbnail,trailText`;
             const response = await axios.get(endpoint);
             return await response.data;
         } catch (error) {

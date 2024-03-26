@@ -4,8 +4,6 @@ import Footer from './components/layout/footer/Footer'
 import Navigation from './components/layout/navigation/Navigation'
 import Home from './pages/home/Home'
 import NotFound from './pages/notFound/NotFound'
-import NewYorkTimes from "./pages/newYorkTimes/NewYorkTimes";
-import Guardian from "./pages/guardian/Guardian";
 import StyledContainer from "./styles/StyledContainer";
 
 const Layout = () => {
@@ -25,8 +23,6 @@ const AppRouter = () => (
             <Route path='/' element={<Layout/>}>
                 <Route index element={<Home/>}/>
                 <Route path={'/home'} element={<Home/>}/>
-                <Route path={'/new-york-times'} element={<NewYorkTimes/>}/>
-                <Route path={'/Iguardian.ts'} element={<Guardian/>}/>
                 <Route path='*' element={<NotFound/>}/>
             </Route>
         </Routes>
