@@ -11,12 +11,15 @@ import Select, {SingleValue} from "react-select";
 import {fetchGuardianNews} from "store/slices/newsGuardianSlice";
 import {fetchNews} from "store/slices/newsSlice";
 import {fetchSources} from "store/slices/newsSourcesSlice";
+import axios from "axios";
+import {fetchNewYorkTimesNews} from "../../store/slices/newsNewYorkTImesSlice";
 
 const Home = () => {
     const dispatch = useAppDispatch();
     const newsSources = useAppSelector((state: RootState) => state.newsSources);
     const news = useAppSelector((state: RootState) => state.news);
     const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
+    const newsNewYorkTimes = useAppSelector((state: RootState) => state.newsNewYorkTimes);
 
 
     const [query, setQuery] = useState('armenia');
@@ -25,12 +28,24 @@ const Home = () => {
     const [range, setRange] = useState<Irange>({from: '', to: ''});
 
     useEffect(() => {
-        dispatch(fetchSources())
-        dispatch(fetchNews({query, order: order.label, sources, range}))
-        dispatch(fetchGuardianNews({query: query, range}));
+        // dispatch(fetchSources())
+        // dispatch(fetchNews({query, order: order.label, sources, range}))
+        // dispatch(fetchGuardianNews({query: query, range}));
+        dispatch(fetchNewYorkTimesNews());
     }, [query, order, sources, range, dispatch]);
 
-
+    useEffect(() => {
+        console.log(newsNewYorkTimes)
+    }, [newsNewYorkTimes]);
+    // useEffect(() => {
+    //    const f =async () => {
+    //        const response = await axios.get(
+    //            'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=h1TylVtDCbyqnZZWgBXfGhU0lXQr7Cw1'
+    //        );
+    //        console.log(response)
+    //    }
+    //    f()
+    // }, []);
     const searchNews = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
     }
