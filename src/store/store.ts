@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import newsSlice from "./slices/newsSlice";
 import newsGuardianSlice from "./slices/newsGuardianSlice";
 import newsSourcesSlice from "./slices/newsSourcesSlice";
-import newsNewYorkTimesSlice from "./slices/newsSourcesSlice";
+import newsNewYorkTimesSlice from "./slices/newsNewYorkTImesSlice";
 
 const store = configureStore({
     reducer: {

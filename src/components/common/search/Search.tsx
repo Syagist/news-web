@@ -23,6 +23,7 @@ const Search: React.FC<SearchProps> = ({ onSearchChange }) => {
         };
     }, [debouncedSearch]);
 
+
     async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { value } = e.target;
         setSearchValue(value);

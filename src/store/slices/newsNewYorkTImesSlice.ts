@@ -92,7 +92,7 @@ const fetchNewYorkTimesNews = createAsyncThunk(
                 page_size: 20
             };
             const response = await axios.get(baseUrl, {params: queryParams});
-            return response.data; // Return response.data directly
+            return response.data.response; // Return response.data directly
         } catch (error) {
             throw Error('Failed to fetch News');
         }
@@ -111,8 +111,6 @@ const newYorkTimesNewsSlice = createSlice({
             })
             .addCase(fetchNewYorkTimesNews.fulfilled, (state, action) => {
                 state.loading = false;
-                debugger
-                console.log('123123')
                 state.response.docs = action.payload.docs; // Access docs directly
             })
             .addCase(fetchNewYorkTimesNews.rejected, (state, action) => {
