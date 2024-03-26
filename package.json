@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.22",
     "@types/redux": "^3.6.0",
     "axios": "^1.6.8",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-date-range": "^2.0.0-alpha.4",
     "react-dom": "^18.2.0",
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.2.2",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react-date-range": "^1.4.9"
   }
 }

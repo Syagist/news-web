@@ -1,45 +1,40 @@
-import React, {useEffect, useState} from 'react';
-import {StyledHome, StyledPreferencesWrapper, StyledPreferenceWrapper, StyledTitle} from "./StyledHome";
-import {RootState, useAppDispatch, useAppSelector} from "store/store";
-import Articles from "components/common/articles/Articles";
-import Search from "components/common/search/Search";
-import {ORDERS} from "constants/AppConstants";
-import RangePicker from "components/common/rangePicker/RangePicker";
-import {Irange} from "interfaces/Irange";
-import {Option} from "interfaces/Ioption";
-import Select, {SingleValue} from "react-select";
-import {fetchGuardianNews} from "store/slices/newsGuardianSlice";
-import {fetchNews} from "store/slices/newsSlice";
-import {fetchSources} from "store/slices/newsSourcesSlice";
+import React, { useEffect, useState, ChangeEvent } from 'react';
+import Select, { SingleValue } from 'react-select';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import { fetchGuardianNews } from 'store/slices/newsGuardianSlice';
+import { fetchNews } from 'store/slices/newsSlice';
+import { fetchSources } from 'store/slices/newsSourcesSlice';
+import { StyledHome, StyledPreferencesWrapper, StyledPreferenceWrapper, StyledTitle } from './StyledHome';
+import Articles from 'components/common/articles/Articles';
+import Search from 'components/common/search/Search';
+import RangePicker from 'components/common/rangePicker/RangePicker';
+import { ORDERS } from 'constants/AppConstants';
+import { Irange } from 'interfaces/Irange';
+import { Option } from 'interfaces/Ioption';
 
 const Home = () => {
     const dispatch = useAppDispatch();
-    const newsSources = useAppSelector((state: RootState) => state.newsSources);
-    const news = useAppSelector((state: RootState) => state.news);
-    const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
-    const newsNewYorkTimes = useAppSelector((state: RootState) => state.newsNewYorkTimes);
-
-
-    const [query, setQuery] = useState('armenia');
+    const [query, setQuery] = useState<string>('armenia');
     const [order, setOrder] = useState<Option>(ORDERS[0]);
     const [sources, setSources] = useState<string>('');
-    const [range, setRange] = useState<Irange>({from: '', to: ''});
+    const [range, setRange] = useState<Irange>({ from: '', to: '' });
 
     useEffect(() => {
-        dispatch(fetchSources())
-        dispatch(fetchNews({query, order: order.label, sources, range}))
-        dispatch(fetchGuardianNews({query: query, range}));
-        // dispatch(fetchNewYorkTimesNews());
+        dispatch(fetchSources());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchNews({ query, order: order.label, sources, range }));
+        dispatch(fetchGuardianNews({ query, range }));
     }, [query, order, sources, range, dispatch]);
 
-
-    const searchNews = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
-    }
+    const searchNews = (value: string) => {
+        setQuery(value);
+    };
 
     const onRangeSelected = (start: string, end: string) => {
-        setRange({from: start, to: end});
-    }
+        setRange({ from: start, to: end });
+    };
 
     const orderSelected = (newValue: SingleValue<Option>) => {
         if (newValue) {
@@ -49,41 +44,45 @@ const Home = () => {
 
     const sourcesSelected = (newValue: SingleValue<Option>) => {
         if (newValue?.title) {
-            setSources(prevState => {
-                return prevState.concat(newValue.title + ',');
-            });
+            setSources(prevState => prevState.concat(newValue.title + ','));
         }
     };
 
+    const newsSources = useAppSelector((state: RootState) => state.newsSources);
+    const news = useAppSelector((state: RootState) => state.news);
+    const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
+
     return (
         <StyledHome>
-            <Search value={query} onSearchChange={searchNews}/>
+            <Search  onSearchChange={searchNews} />
             <StyledPreferencesWrapper>
                 <StyledPreferenceWrapper>
                     <Select
                         value={order}
                         onChange={orderSelected}
                         options={ORDERS}
-                        placeholder={'Order'}
+                        placeholder="Order"
                     />
                 </StyledPreferenceWrapper>
                 <StyledPreferenceWrapper>
                     <Select
                         onChange={sourcesSelected}
-                        options={newsSources.sources.map(source =>
-                            ({label: source.name, title: source.id}))} // Convert sources to options format
-                        placeholder={'Select source'}
+                        options={newsSources.sources.map(source => ({
+                            label: source.name,
+                            title: source.id
+                        }))}
+                        placeholder="Select source"
                     />
                 </StyledPreferenceWrapper>
                 <StyledPreferenceWrapper>
-                    <RangePicker onRangeSelected={onRangeSelected}/>
+                    <RangePicker onRangeSelected={onRangeSelected} />
                 </StyledPreferenceWrapper>
             </StyledPreferencesWrapper>
 
-            <StyledTitle>News api</StyledTitle>
-            <Articles news={news}/>
-            <StyledTitle>guardian api</StyledTitle>
-            <Articles news={newsGuardian}/>
+            <StyledTitle>News API</StyledTitle>
+            <Articles news={news} />
+            <StyledTitle>Guardian API</StyledTitle>
+            <Articles news={newsGuardian} />
         </StyledHome>
     );
 };

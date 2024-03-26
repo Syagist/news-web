@@ -2,6 +2,7 @@ import {AbstractArticle} from "./abstractArticle";
 
 interface ArticleFields {
     thumbnail: string,
+    author: string,
     trailText: string
 }
 

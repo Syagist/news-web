@@ -15,7 +15,7 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
     const hasNewsApiData = 'articles' in news && news.articles !== null && news.articles.length > 0;
 
     if (news.error) {
-        return <ErrorView/>;
+        return <ErrorView errorMessage={news.error}/>;
     }
 
     if (news.loading) {
@@ -33,10 +33,8 @@ const Articles: React.FC<ArticlesProps> = ({news}) => {
 
     return <NoDataView title={'No data'} description={'Sorry there is no news by your search'}/>;
 }
-
-
-const ErrorView: React.FC = () => {
-    return <div>Error: Failed to load articles.</div>;
+const ErrorView = ({errorMessage}: {errorMessage:string}) => {
+    return <div>{errorMessage}</div>;
 };
 
 
