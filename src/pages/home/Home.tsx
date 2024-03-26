@@ -11,6 +11,7 @@ import RangePicker from 'components/common/rangePicker/RangePicker';
 import { ORDERS } from 'constants/AppConstants';
 import { Irange } from 'interfaces/Irange';
 import { Option } from 'interfaces/Ioption';
+import {fetchNewYorkTimesNews} from "store/slices/newsNewYorkTImesSlice";
 
 const Home = () => {
     const dispatch = useAppDispatch();
@@ -18,14 +19,23 @@ const Home = () => {
     const [order, setOrder] = useState<Option>(ORDERS[0]);
     const [sources, setSources] = useState<string>('');
     const [range, setRange] = useState<Irange>({ from: '', to: '' });
+    const newsSources = useAppSelector((state: RootState) => state.newsSources);
+    const news = useAppSelector((state: RootState) => state.news);
+    const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
+    const newsNewYorkTimes = useAppSelector((state: RootState) => state.newsNewYorkTimes);
 
     useEffect(() => {
-        dispatch(fetchSources());
+        // dispatch(fetchSources());
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchNews({ query, order: order.label, sources, range }));
-        dispatch(fetchGuardianNews({ query, range }));
+        console.log(newsNewYorkTimes)
+    }, [newsNewYorkTimes]);
+
+    useEffect(() => {
+        // dispatch(fetchNews({ query, order: order.label, sources, range }));
+        // dispatch(fetchGuardianNews({ query, range }));
+        dispatch(fetchNewYorkTimesNews());
     }, [query, order, sources, range, dispatch]);
 
     const searchNews = (value: string) => {
@@ -48,9 +58,6 @@ const Home = () => {
         }
     };
 
-    const newsSources = useAppSelector((state: RootState) => state.newsSources);
-    const news = useAppSelector((state: RootState) => state.news);
-    const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
 
     return (
         <StyledHome>
@@ -83,6 +90,8 @@ const Home = () => {
             <Articles news={news} />
             <StyledTitle>Guardian API</StyledTitle>
             <Articles news={newsGuardian} />
+            <StyledTitle>NewYorkTimes API</StyledTitle>
+            <Articles news={newsNewYorkTimes} />
         </StyledHome>
     );
 };

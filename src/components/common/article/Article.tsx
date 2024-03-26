@@ -13,11 +13,12 @@ import {
     ArticlePublishDate,
     ArticleTitle
 } from "./StyledArticle";
+import {INewYorkTimesDocument} from "../../../interfaces/InewYorkTimes";
 
 
 interface ArticleProps {
-    source: 'guardian' | 'newsApi';
-    articleSrc: IArticle | IGuardianArticle;
+    source: 'guardian' | 'newsApi' | 'newYorkTimesApi';
+    articleSrc: IArticle | IGuardianArticle | INewYorkTimesDocument;
 }
 
 
