@@ -41,7 +41,6 @@ const RangePicker = ({ onRangeSelected }: IRange) => {
                     />
                 </StyledRangePicker>
             }
-
         </StyledRangePickerWrapper>
     );
 };

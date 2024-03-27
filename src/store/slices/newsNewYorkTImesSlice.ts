@@ -1,7 +1,7 @@
 import axios from "axios";
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {INewYorkTimesData} from "interfaces/InewYorkTimes";
-import {INewYorkTimes} from "interfaces/InewYorkTimes";
+import {INewYorkTimes, INewYorkTimesData} from "interfaces/InewYorkTimes";
+import {Irange} from "../../interfaces/Irange";
 
 
 const initialState: INewYorkTimesData = {
@@ -10,19 +10,39 @@ const initialState: INewYorkTimesData = {
     error: null
 };
 
+interface NewYorkTimesNewsProperties {
+    query: string,
+    range: Irange
+}
+
+interface QueryParams {
+    q?: string;
+    sort?: string;
+    'api-key': string;
+    page_size?: number;
+    begin_date?: string;
+    end_date?: string;
+}
+
 const fetchNewYorkTimesNews = createAsyncThunk(
     'articles/fetchNewYorkTimesNews',
-    async () => {
+    async ({query, range}: NewYorkTimesNewsProperties) => {
         try {
             const baseUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-
-            const queryParams = {
-                begin_date: '20220301',
-                end_date: '20220331',
+            const queryParams: QueryParams = {
+                q: query,
                 sort: 'newest',
                 'api-key': 'h1TylVtDCbyqnZZWgBXfGhU0lXQr7Cw1',
                 page_size: 20
             };
+
+            if (range.from) {
+                queryParams.begin_date = range.from;
+            }
+            if (range.to) {
+                queryParams.end_date = range.to;
+            }
+
             const response = await axios.get(baseUrl, {params: queryParams});
             return response.data.response; // Return response.data directly
         } catch (error) {

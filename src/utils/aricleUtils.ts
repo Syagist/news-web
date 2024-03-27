@@ -45,10 +45,16 @@ export const getArticle = (source: string, articleSrc: AbstractArticle) => {
                 title: newYorkTimesApiArticle.headline.main,
                 description: newYorkTimesApiArticle.snippet ?? '',
                 url: newYorkTimesApiArticle.web_url,
-                urlToImage: 'https://www.nytimes.com/' + newYorkTimesApiArticle.multimedia[0].url ?? '',
+                urlToImage: getImage(newYorkTimesApiArticle.multimedia),
                 publishedAt: newYorkTimesApiArticle.pub_date ?? ''
             };
             break;
     }
     return article;
+}
+const getImage = (multimedia:Array<any>) => {
+    if (!multimedia || multimedia.length === 0 || !multimedia[0] || !multimedia[0].url){
+        return ''
+    }
+    return 'https://www.nytimes.com/' + multimedia[0].url
 }

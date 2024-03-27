@@ -25,7 +25,7 @@ const Home = () => {
     const newsNewYorkTimes = useAppSelector((state: RootState) => state.newsNewYorkTimes);
 
     useEffect(() => {
-        // dispatch(fetchSources());
+        dispatch(fetchSources());
     }, [dispatch]);
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const Home = () => {
     useEffect(() => {
         // dispatch(fetchNews({ query, order: order.label, sources, range }));
         // dispatch(fetchGuardianNews({ query, range }));
-        dispatch(fetchNewYorkTimesNews());
+        dispatch(fetchNewYorkTimesNews({ query, range }));
     }, [query, order, sources, range, dispatch]);
 
     const searchNews = (value: string) => {
