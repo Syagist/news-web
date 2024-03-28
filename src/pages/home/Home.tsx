@@ -19,6 +19,7 @@ const Home = () => {
     const [order, setOrder] = useState<Option>(ORDERS[0]);
     const [sources, setSources] = useState<string>('');
     const [range, setRange] = useState<Irange>({ from: '', to: '' });
+
     const newsSources = useAppSelector((state: RootState) => state.newsSources);
     const news = useAppSelector((state: RootState) => state.news);
     const newsGuardian = useAppSelector((state: RootState) => state.newsGuardian);
@@ -29,12 +30,8 @@ const Home = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(newsNewYorkTimes)
-    }, [newsNewYorkTimes]);
-
-    useEffect(() => {
-        // dispatch(fetchNews({ query, order: order.label, sources, range }));
-        // dispatch(fetchGuardianNews({ query, range }));
+        dispatch(fetchNews({ query, order: order.label, sources, range }));
+        dispatch(fetchGuardianNews({ query, range }));
         dispatch(fetchNewYorkTimesNews({ query, range }));
     }, [query, order, sources, range, dispatch]);
 

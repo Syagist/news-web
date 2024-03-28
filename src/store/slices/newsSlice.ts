@@ -23,7 +23,7 @@ const fetchNews = createAsyncThunk(
     'articles/fetchNews',
     async ({query, order, sources, range}: NewsRequestProperties) => {
         try {
-            const endpoint = `${NEWS_API}/everything?sources=${sources}&q=${query}&from=${range.from}&to=${range.to}&sortBy=${order}&apiKey=${REACT_APP_NEWS_API_KEY}&pageSize=200`;
+            const endpoint = `${NEWS_API}/everything?sources=${sources}&q=${query}&from=${range.from}&to=${range.to}&sortBy=${order}&apiKey=${REACT_APP_NEWS_API_KEY}&pageSize=30`;
             const response = await axios.get(endpoint);
             return await response.data;
         } catch (error) {

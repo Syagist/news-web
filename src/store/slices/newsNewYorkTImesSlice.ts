@@ -1,7 +1,8 @@
 import axios from "axios";
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {INewYorkTimes, INewYorkTimesData} from "interfaces/InewYorkTimes";
-import {Irange} from "../../interfaces/Irange";
+import {Irange} from "interfaces/Irange";
+import {NEW_YORK_TIMES, REACT_APP_NYT_API_KEY} from "constants/AppConstants";
 
 
 const initialState: INewYorkTimesData = {
@@ -28,11 +29,11 @@ const fetchNewYorkTimesNews = createAsyncThunk(
     'articles/fetchNewYorkTimesNews',
     async ({query, range}: NewYorkTimesNewsProperties) => {
         try {
-            const baseUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+            const baseUrl = `${NEW_YORK_TIMES}/svc/search/v2/articlesearch.json`;
             const queryParams: QueryParams = {
                 q: query,
                 sort: 'newest',
-                'api-key': 'h1TylVtDCbyqnZZWgBXfGhU0lXQr7Cw1',
+                'api-key': REACT_APP_NYT_API_KEY ?? '',
                 page_size: 20
             };
 
@@ -44,7 +45,7 @@ const fetchNewYorkTimesNews = createAsyncThunk(
             }
 
             const response = await axios.get(baseUrl, {params: queryParams});
-            return response.data.response; // Return response.data directly
+            return response.data.response;
         } catch (error) {
             throw Error('Failed to fetch News');
         }
@@ -63,7 +64,7 @@ const newYorkTimesNewsSlice = createSlice({
             })
             .addCase(fetchNewYorkTimesNews.fulfilled, (state, action) => {
                 state.loading = false;
-                state.response.docs = action.payload.docs; // Access docs directly
+                state.response.docs = action.payload.docs;
             })
             .addCase(fetchNewYorkTimesNews.rejected, (state, action) => {
                 state.loading = false;

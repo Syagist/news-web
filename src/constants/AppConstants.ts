@@ -6,6 +6,7 @@ export const NEWS_API = "https://newsapi.org/v2"
 
 export const REACT_APP_NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 export const REACT_APP_GUARDIAN_API_KEY = process.env.REACT_APP_GUARDIAN_API_KEY;
+export const REACT_APP_NYT_API_KEY = process.env.REACT_APP_NYT_API_KEY;
 
 export const ORDERS:Option[] = [
     { title: 'relevancy', label: 'Relevancy' },
