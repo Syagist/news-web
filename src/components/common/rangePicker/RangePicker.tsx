@@ -14,7 +14,7 @@ const RangePicker = ({ onRangeSelected }: IRange) => {
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
         endDate: new Date(),
-        key: 'selection',
+        key: 'sourceSelection',
     });
     const [rangeVisible, setRangeVisible] = useState(false);
     const pickerRef = useRef<HTMLDivElement>(null);

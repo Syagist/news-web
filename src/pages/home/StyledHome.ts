@@ -21,3 +21,14 @@ export const StyledPreferenceWrapper = styled.div`
     padding: 0 10px;
 `;
 
+export const StyledSelectionWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 10px 0 20px;
+`;
+export const StyledLabel = styled.label`
+    margin-right: 20px;
+`;
+export const StyledCheckBox = styled.input`
+    margin-right: 5px;
+`;

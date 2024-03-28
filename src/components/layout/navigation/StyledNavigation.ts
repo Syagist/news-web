@@ -39,6 +39,8 @@ export const StyledNavigationWrapper = styled.div`
         justify-content: center;
         align-items: flex-start;
     }
+    
+  
 `;
 
 export const StyledLink = styled(Link)`
@@ -55,8 +57,13 @@ export const StyledLink = styled(Link)`
 export const StyledNavigationBurger = styled.button`
     display: none;
     z-index: 200;
-    
     position: relative;
+    
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
     @media (max-width: 768px) {
         display: flex;
         width: 44px;

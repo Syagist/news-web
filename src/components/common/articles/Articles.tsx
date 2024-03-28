@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyledArticles} from './StyledArticles';
 import Article from 'components/common/article/Article';
-import {IGuardianArticle, IGuardianNews} from "interfaces/Iguardian";
-import {IArticle, INews} from "interfaces/Inews";
 import NoDataView from "components/common/noDataView/NoDataView";
-import Skeletons from "./Skeletons";
+import {IGuardianArticle, IGuardianNews} from "interfaces/Iguardian";
 import {INewYorkTimesData, INewYorkTimesDocument} from "interfaces/InewYorkTimes";
+import {IArticle, INews} from "interfaces/Inews";
+import Skeletons from "./Skeletons";
 
 interface ArticlesProps {
     news: INews | IGuardianNews | INewYorkTimesData;
@@ -52,11 +52,36 @@ interface ArticleListProps {
 }
 
 const ArticleList: React.FC<ArticleListProps> = ({articles, source}) => {
+
+    const generateRandomString = () => Math.random().toString();
+
+
+    const getKey = (article: IArticle | IGuardianArticle | INewYorkTimesDocument) => {
+        switch (source) {
+            case "newsApi":
+                const newsApiArticle = article as IArticle;
+                if (newsApiArticle.url.includes('removed')) {
+                    return generateRandomString();
+                }
+                return newsApiArticle.url;
+            case 'guardian':
+                const guardianArticle = article as IGuardianArticle;
+                return guardianArticle.id;
+
+            case 'newYorkTimesApi':
+                const newYorkTimesArticle = article as INewYorkTimesDocument;
+                return newYorkTimesArticle._id;
+            default:
+                return generateRandomString();
+
+        }
+    };
+
     return (
         <StyledArticles>
             {articles.map((article) => (
                 <Article
-                    key={source === 'newsApi' ? (article as IArticle).url : (article as IGuardianArticle).id}
+                    key={getKey(article)}
                     articleSrc={article}
                     source={source}
                 />
