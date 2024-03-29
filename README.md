@@ -1,5 +1,12 @@
 # Getting Started with Create React App
-# Run docker desktop 
+
+#  create .env file place there your api keys REACT_APP_NEWS_API_KEY/REACT_APP_GUARDIAN_API_KEY/REACT_APP_NYT_API_KEY
+# Run docker desktop
+# open terminal in admin mode make sure you have node.js installed, 
+# move to project path and run command docker build -t <app-name> .
+# open docker desktop you can see image created click on run 
+# after successful run navigate to contaieners you should see host created under ports tab click on it
+# if in this step you cannot react localhost retry and customize port config for example if it currently 8080 try to change 8081
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
